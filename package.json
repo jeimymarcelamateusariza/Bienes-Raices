@@ -7,7 +7,8 @@
   "scripts": {
     "start": "node index.js",
     "server": "nodemon index.js",
-    "css": "tailwindcss -i ./public/src/tailwind.css -o ./public/src/app.css --watch"
+    "css": "tailwindcss -i ./public/src/tailwind.css -o ./public/src/app.css --watch",
+    "dev": "npm run server & npm run css"
   },
   "repository": {
     "type": "git",
@@ -27,8 +28,11 @@
   },
   "homepage": "https://github.com/jeimymarcelamateusariza/Bienes-Raices#readme",
   "dependencies": {
+    "dotenv": "^17.2.1",
     "express": "^5.1.0",
-    "pug": "^3.0.3"
+    "mysql2": "^3.14.3",
+    "pug": "^3.0.3",
+    "sequelize": "^6.37.7"
   },
   "devDependencies": {
     "autoprefixer": "^10.4.21",
