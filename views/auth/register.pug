@@ -1,0 +1,63 @@
+extends ../layout/main
+
+block contenido
+    div(class="min-h-screen bg-primary p-4 md:p-0")
+        div(class="container mx-auto")
+            div(class="flex flex-col md:flex-row items-center justify-center min-h-screen gap-10")
+                // Formulario
+                div(class="w-full md:w-1/2 max-w-md")
+                    h1(class="text-4xl font-bold text-white mb-5 text-center") Nidum
+                    h2(class="text-white text-sm mb-8 text-center") Crea una cuenta para poder inciar sesión
+                    form(class="space-y-6")
+                        div
+                            label(class="block text-white text-sm" for="nombre") Nombre
+                            input(
+                                type="text"
+                                id="nombre"
+                                name="nombre"
+                                placeholder="Ingresa tu nombre"
+                                class="w-full px-3 py-2 rounded-md bg-white placeholder-gray-400 focus:outline-none focus:ring-2 focus:ring-secondary hover:ring-2 hover:ring-primary-dark"
+                            )
+                        div
+                            label(class="block text-white text-sm" for="email") Correo
+                            input(
+                                type="email"
+                                id="email"
+                                name="email"
+                                placeholder="Ingresa tu correo"
+                                class="w-full px-3 py-2 rounded-md bg-white placeholder-gray-400 focus:outline-none focus:ring-2 focus:ring-secondary hover:ring-2 hover:ring-primary-dark"
+                            )
+                        div
+                            label(class="block text-white text-sm" for="password") Contraseña
+                            input(
+                                type="password"
+                                id="password"
+                                name="password"
+                                placeholder="Ingresa tu contraseña"
+                                class="w-full px-3 py-2 rounded-md bg-white placeholder-gray-400 focus:outline-none focus:ring-2 focus:ring-secondary hover:ring-2 hover:ring-primary-dark"
+                            )
+                        div
+                            label(class="block text-white text-sm" for="password2") Confirmar contraseña
+                            input(
+                                type="password"
+                                id="password2"
+                                name="password2"
+                                placeholder="Confirma tu contraseña"
+                                class="w-full px-3 py-2 rounded-md bg-white placeholder-gray-400 focus:outline-none focus:ring-2 focus:ring-secondary hover:ring-2 hover:ring-principal"
+                            )
+                        input(
+                            type="submit"
+                            value="Crear cuenta"
+                            class="w-full bg-secondary text-primary font-bold py-2 px-4 rounded-md hover:bg-secondary/90 transition-colors"
+                        )
+                        .flex.items-center.justify-between 
+                            a(href="/auth/forgot-password" class="text-secondary text-sm hover:text-secondary/90") ¿Olvidaste tu contraseña?
+                            p(class="text-white text-sm") ¿Ya tienes cuenta? 
+                                a(href="/auth/login" class="text-secondary hover:text-secondary/90") Inicia sesión
+
+                // Imagen de la casa
+                div(class="hidden md:block w-full md:w-1/2 max-w-md")
+                    div(class="relative")
+                        div(class="w-full h-100 clip-house overflow-hidden")
+                            img(src="/img/Auth.png" alt="Imagen de casa" class="object-cover")
+                        div(class="absolute -bottom-2 -right-2 w-full h-96 border-2 border-secondary rounded-lg") 
