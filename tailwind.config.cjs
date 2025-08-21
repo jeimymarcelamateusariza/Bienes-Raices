@@ -5,7 +5,13 @@ module.exports = {
     "./public/**/*.js"
   ],
   theme: {
-    extend: {},
+    extend: {
+      colors: {
+        'primary': '#356b3c',
+        'primary-dark': '#2a5530',
+        'secondary': '#fdefa7',
+      },
+    },
   },
   plugins: [],
 }
