@@ -5,9 +5,13 @@ import db from "./config/db.js";
 //Crear la app
 const app = express();
 
+//Habilitar lectura de datos del formulario
+app.use(express.urlencoded({ extended: true }));
+
 //Conectar a la base de datos
 try {
     await db.authenticate();
+    db.sync(); // Si la base de datos no existe, la crea
     console.log("Conexión a la base de datos exitosa");
 } catch (error) {
     console.error("Error al conectar a la base de datos:", error);
