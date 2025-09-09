@@ -8,7 +8,11 @@ const formularioLogin = (req, res) => {
 }
 
 const formularioRegister = (req, res) => {
-    res.render('auth/register', { pagina: 'Crear cuenta' });
+    //console.log(req.csrfToken());
+    res.render('auth/register', { 
+        pagina: 'Crear cuenta',
+        csrfToken: req.csrfToken()
+     });
 }
 
 const register = async (req, res) => {
@@ -25,6 +29,7 @@ const register = async (req, res) => {
         //Errores
         return res.render('auth/register', {
             pagina: 'Crear cuenta',
+            csrfToken: req.csrfToken(),
             errores: resultado.array(),
             usuario: {
                 nombre: req.body.nombre,
@@ -40,6 +45,7 @@ const register = async (req, res) => {
     if (existeUsuario) {
         return res.render('auth/register', {
             pagina: 'Crear cuenta',
+            csrfToken: req.csrfToken(),
             errores: [{ msg: 'El usuario ya esta registrado' }],
             usuario: {
                 nombre: req.body.nombre,

@@ -14,6 +14,7 @@ block contenido
                                 p(class="bg-red-400 text-white rounded-md my-1 text-xs text-center p-2")= error.msg
                         
                     form(class="space-y-6" method="POST" action="/auth/register" noValidate)
+                        input(type="hidden" name="_csrf" value=csrfToken)
                         div
                             label(class="block text-white text-sm" for="nombre") Nombre
                             input(
