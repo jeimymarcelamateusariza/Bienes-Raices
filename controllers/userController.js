@@ -1,6 +1,7 @@
 import { check, validationResult } from 'express-validator';
 import User from '../models/User.js';
 import { generarId } from '../helpers/tokens.js';
+import { emailRegister } from '../helpers/email.js';
 
 const formularioLogin = (req, res) => {
     res.render('auth/login', { pagina: 'Iniciar sesión' });
@@ -48,20 +49,52 @@ const register = async (req, res) => {
     }
 
     //Almacenar un usuario
-    await User.create({
+    const usuario = await User.create({
         nombre,
         email,
         password,
         token: generarId()
     });
 
+    //Envia el email de confirmación
+    emailRegister({
+        nombre: usuario.nombre,
+        email: usuario.email,
+        token: usuario.token
+    });
+
     //Mostrar mensaje de confirmación
     res.render('templates/message', {
         pagina: 'Cuenta creada correctamente',
         mensaje: 'Hemos enviado un correo de confirmación, presiona en el enlace'
-    } )
+    })
+}
 
+//Función para comprobar la cuenta
+const confirmar = async (req, res, next) => {
+    const { token } = req.params;
+    //Verificar si el token es valido
+    const usuario = await User.findOne({ where: { token } });
 
+    if (!usuario) {
+        return res.render('auth/confirm-account', {
+            pagina: 'Error al confirmar tu cuenta',
+            mensaje: 'Hubo un error al confirmar tu cuenta, intenta de nuevo',
+            error: true
+        }
+        )
+    }
+    //Confirmar la cuenta
+    usuario.token = null;
+    usuario.confirmado = true;
+    await usuario.save();
+    res.render('auth/confirm-account', {
+        pagina: 'Cuenta confirmada',
+        mensaje: 'La cuenta se confirmó correctamente, ya puedes iniciar sesión'
+    }
+    )
+
+    next();
 }
 
 const formularioOlvidePassword = (req, res) => {
@@ -69,4 +102,4 @@ const formularioOlvidePassword = (req, res) => {
 }
 
 
-export { formularioLogin, formularioRegister, formularioOlvidePassword, register };
+export { formularioLogin, formularioRegister, confirmar, formularioOlvidePassword, register };
